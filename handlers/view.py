@@ -1,0 +1,24 @@
+from aiogram import types
+from aiogram.dispatcher import Dispatcher
+from create_bot import dp
+from data_base import sqlite_db
+from data_base.sqlite_db import sql_read, get_all_bd
+import datetime
+
+async def show_people(message: types.Message):
+    await sql_read(message)
+
+async def show_closest_birthday(message: types.Message):
+    birthday = await sqlite_db.get_closest_bd()
+    await message.answer(f'{birthday[0]}: {birthday[1]} days left')
+
+async def show_all_birthdays(message: types.Message):
+    people = await get_all_bd()
+    for person in people:
+        await message.answer(f'{person[0]}({person[1]}): {person[2]} days left')
+
+def register_handlers_view(dp: Dispatcher):
+    dp.register_message_handler(show_all_birthdays, commands='all_bd')
+    dp.register_message_handler(show_people, commands='people')
+    dp.register_message_handler(show_closest_birthday, commands='closest_bd')
+
