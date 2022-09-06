@@ -1,9 +1,11 @@
+from urllib import request
 from aiogram import types
 from aiogram.dispatcher import Dispatcher
 from create_bot import dp
 from data_base import sqlite_db
 from data_base.sqlite_db import sql_read, get_all_bd
 import datetime
+from make_request import do_req
 
 async def show_people(message: types.Message):
     await sql_read(message)
@@ -18,7 +20,7 @@ async def show_all_birthdays(message: types.Message):
         await message.answer(f'{person[0]}({person[1]}): {person[2]} days left')
 
 async def get_notif(message: types.Message):
-    pass
+    do_req()
 
 def register_handlers_view(dp: Dispatcher):
     dp.register_message_handler(get_notif, commands='notif')
