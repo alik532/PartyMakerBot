@@ -23,12 +23,7 @@ async def show_all_birthdays(message: types.Message):
 async def get_notif(message: types.Message):
     do_req()
 
-def schedule_checker():
-    while True:
-        schedule.run_pending()
-        sleep(1)
-
-schedule.every().wednesday.at("23:10").do(do_req())
+schedule.every().wednesday.at("23:20").do(do_req())
 
 
 def register_handlers_view(dp: Dispatcher):
