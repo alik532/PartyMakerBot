@@ -17,7 +17,11 @@ async def show_all_birthdays(message: types.Message):
     for person in people:
         await message.answer(f'{person[0]}({person[1]}): {person[2]} days left')
 
+async def get_notif(message: types.Message):
+    pass
+
 def register_handlers_view(dp: Dispatcher):
+    dp.register_message_handler(get_notif, commands='notif')
     dp.register_message_handler(show_all_birthdays, commands='all_bd')
     dp.register_message_handler(show_people, commands='people')
     dp.register_message_handler(show_closest_birthday, commands='closest_bd')
