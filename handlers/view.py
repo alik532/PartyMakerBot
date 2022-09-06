@@ -29,7 +29,6 @@ def schedule_checker():
         sleep(1)
 
 schedule.every().wednesday.at("23:10").do(do_req())
-Thread(target=schedule_checker).start() 
 
 
 def register_handlers_view(dp: Dispatcher):
