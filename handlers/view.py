@@ -24,12 +24,6 @@ async def show_all_birthdays(message: types.Message):
 async def get_notif(message: types.Message):
     do_req()
 
-schedule.every().tuesday.at("23:40").do(print('time'))
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
-
 def register_handlers_view(dp: Dispatcher):
     dp.register_message_handler(get_notif, commands='notif')
     dp.register_message_handler(show_all_birthdays, commands='all_bd')
