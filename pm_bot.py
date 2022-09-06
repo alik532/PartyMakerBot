@@ -9,11 +9,6 @@ import time
 async def on_startup(_):
     print('Bot Online')
     sql_start()
-    schedule.every().tuesday.at("23:33").do(do_req())
-
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
 
 view.register_handlers_view(dp)
 edit.register_handlers_edit(dp)

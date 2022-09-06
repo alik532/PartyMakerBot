@@ -5,6 +5,9 @@ from data_base import sqlite_db
 from data_base.sqlite_db import sql_read, get_all_bd
 from time import sleep
 from make_request import do_req
+import schedule
+import time
+from create_bot import bot
 
 async def show_people(message: types.Message):
     await sql_read(message)
@@ -20,6 +23,12 @@ async def show_all_birthdays(message: types.Message):
 
 async def get_notif(message: types.Message):
     do_req()
+
+schedule.every().tuesday.at("23:40").do(print('time'))
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
 
 def register_handlers_view(dp: Dispatcher):
     dp.register_message_handler(get_notif, commands='notif')
